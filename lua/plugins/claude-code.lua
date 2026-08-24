@@ -6,7 +6,7 @@ return {
     config = function()
         require("claude-code").setup({
             window = {
-                split_ratio = 0.3,
+                split_ratio = 0.4,
                 position = "botright vsplit",
                 enter_insert = true,
                 hide_numbers = true,

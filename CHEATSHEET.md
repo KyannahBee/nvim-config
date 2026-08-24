@@ -14,6 +14,8 @@ The **Leader** key is set to: `Space`
 | `C-,` | open claude terminal on the right side of the screen |
 | `C-h` | move to the window on the left (aka return to editor from claude) |
 | `C-l` | move to the window on the right (aka return to claude from editor) |
+| `<leader>cC` | Claude Continue | Resume the previous claude-code session |
+| `<leader>cV` | Claude Verbose | Open claude-code with verbose output |
 
 ## 🔍 Navigation & Search (Telescope)
 | Key | Action | Description |
@@ -31,8 +33,6 @@ The **Leader** key is set to: `Space`
 | Key | Action | Description |
 |-----|--------|-------------|
 | `gd` | Go to Definition | Jump to where the symbol is defined |
-| `gD` | Go to Declaration | Jump to the variable/function declaration |
-| `gi` | Go to Implementation | Jump to interface implementations |
 | `gr` | Show References | List all places this symbol is used |
 | `K`  | Hover Doc | Show documentation for symbol under cursor |
 | `<leader>rn` | **R**e**n**ame | Rename symbol across the entire project |
@@ -53,8 +53,7 @@ The **Leader** key is set to: `Space`
 | Key | Action | Description |
 |-----|--------|-------------|
 | `<leader>f` | Format | Auto-format current buffer (LSP fallback) |
-| `<leader>fm` | **F**ormat **M**anual | Force format using Conform (Prettier/Black/etc) |
-| `Save File` | Auto Format | Automatically cleans code on every `:w` |
+| `Save File` | Auto Format | Automatically cleans code on every `:w` (C/C++ indent style comes from `~/.clang-format`: 4 spaces, no tabs) |
 | `u` / `<C-r>` | Undo / Redo | Standard Neovim history |
 | `"+y` / `"+p` | Clipboard | Copy/Paste to/from System Clipboard |
 
@@ -78,6 +77,7 @@ The **Leader** key is set to: `Space`
 | `Ctrl + h/j/k/l` | Navigation | Move between split windows |
 | `:Lazy` | Plugins | Manage and update your plugins |
 | `:Mason` | Binaries | Manage LSPs, Formatters, and Debuggers |
+| `<leader>tt` | Toggle Terminal | Open/close a floating terminal (toggleterm) |
 
 ---
 

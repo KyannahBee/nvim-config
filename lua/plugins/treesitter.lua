@@ -14,7 +14,7 @@ return {
             ensure_installed = {
                 "lua", "python", "javascript", "typescript",
                 "c", "cpp", "java", "rust", "html", "css", "bash",
-                "vim", "vimdoc", "query",
+                "vim", "vimdoc", --"query",
             },
             auto_install = true,
             highlight = { enable = true },
@@ -22,4 +22,3 @@ return {
         })
     end,
 }
-
