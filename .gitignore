@@ -1,0 +1,2 @@
+# Per-user overrides written by the settings menu — never commit these
+lua/config/local.json
