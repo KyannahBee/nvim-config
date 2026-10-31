@@ -70,4 +70,19 @@ function M.get(key)
     return get_path(M.values, key)
 end
 
+---Set a setting: updates the in-memory values and persists to local.json
+---(merged with any existing overrides). Used by the settings menu.
+function M.set(key, value)
+    set_path(M.values, key, value)
+    local file_overrides = {}
+    if vim.uv.fs_stat(local_path) then
+        local ok, decoded = pcall(vim.json.decode, table.concat(vim.fn.readfile(local_path), "\n"))
+        if ok and type(decoded) == "table" then
+            file_overrides = decoded
+        end
+    end
+    set_path(file_overrides, key, value)
+    vim.fn.writefile({ vim.json.encode(file_overrides) }, local_path)
+end
+
 return M

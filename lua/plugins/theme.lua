@@ -3,10 +3,11 @@ return {
     name = "catppuccin",
     priority = 1000,
     config = function()
+        local t = require("config.settings").values.theme
         require("catppuccin").setup({
             --flavour = 'latte', --latte makes for a light mode
-            flavour = 'mocha',
-            transparent_background = true,
+            flavour = t.flavour,
+            transparent_background = t.transparent_background,
             custom_highlights = function()
                 return {
                     --Normal = { bg = "none" },

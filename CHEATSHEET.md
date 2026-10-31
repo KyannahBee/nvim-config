@@ -10,12 +10,17 @@ The **Leader** key is set to: `Space`
 
 ---
 
-## Claude-code
-| `C-,` | open claude terminal on the right side of the screen |
-| `C-h` | move to the window on the left (aka return to editor from claude) |
-| `C-l` | move to the window on the right (aka return to claude from editor) |
-| `<leader>cC` | Claude Continue | Resume the previous claude-code session |
-| `<leader>cV` | Claude Verbose | Open claude-code with verbose output |
+## ⚙️ Settings Menu
+| `:ConfigSettings` or `<leader>cs` | Open the two-pane settings menu: plugin groups on the left, settings on the right. Edits auto-save to `lua/config/local.json` (gitignored); some settings apply live, the rest auto-restart Neovim on exit |
+
+---
+
+## AI Harness (launches `vibe` by default)
+| `C-,` | open the AI harness terminal on the right side of the screen |
+| `C-h` | move to the window on the left (aka return to editor from the harness) |
+| `C-l` | move to the window on the right (aka return to the harness from editor) |
+| `<leader>cC` | Harness Continue | Resume the previous harness session |
+| `<leader>cV` | Harness Verbose | Open the harness with verbose output |
 
 ## 🔍 Navigation & Search (Telescope)
 | Key | Action | Description |

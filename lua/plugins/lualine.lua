@@ -2,6 +2,7 @@ return {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = function()
+        local l = require("config.settings").values.lualine
         local session_start = os.time()
 
         local function clock()
@@ -16,12 +17,20 @@ return {
             return string.format("⏱ %02d:%02d:%02d", h, m, s)
         end
 
+        local y = {}
+        if l.show_clock then
+            y[#y + 1] = clock
+        end
+        if l.show_session_time then
+            y[#y + 1] = session_time
+        end
+
         return {
             options = {
-                theme = 'everforest',
+                theme = l.theme,
             },
             sections = {
-                lualine_y = { clock, session_time },
+                lualine_y = y,
             },
         }
     end,

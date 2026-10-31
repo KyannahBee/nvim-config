@@ -81,7 +81,7 @@ Managed automatically by [lazy.nvim](https://github.com/folke/lazy.nvim). All pl
 - [nvim-neotest/nvim-nio](https://github.com/nvim-neotest/nvim-nio) — Async IO library (dap-ui dependency)
 
 ### AI
-- [greggh/claude-code.nvim](https://github.com/greggh/claude-code.nvim) — Claude Code terminal integration
+- [greggh/claude-code.nvim](https://github.com/greggh/claude-code.nvim) — generic AI harness launcher (defaults to `vibe`; changeable in the settings menu)
 
 ### Dependencies
 - [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim) — Lua utility library (required by telescope, neo-tree, claude-code)
@@ -106,6 +106,16 @@ On first launch:
 1. Lazy.nvim installs all plugins automatically
 2. Run `:MasonUpdate` to install LSP servers and formatters
 3. Run `:TSUpdate` to install treesitter parsers
+
+---
+
+## Customization (Settings Menu)
+
+Open `:ConfigSettings` (or `<leader>cs`) for a two-pane settings menu: plugin groups on the left, every changeable setting on the right, grouped by plugin. Edits auto-save to `lua/config/local.json`, which is gitignored — your personal overrides never touch the repo.
+
+- `<CR>`/`<Tab>` toggle booleans / cycle enum options, `c` type a custom value, `r` reset to default, `q` quit.
+- Safe settings (theme, harness command) apply live; everything else is saved and Neovim restarts automatically on exit to apply it.
+- All settings are declared in `lua/config/schema.lua` — add an entry there to make a new setting menu-editable.
 
 ---
 

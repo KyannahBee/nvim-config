@@ -16,10 +16,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 vim.opt.number = true --to add line numbers permanently
-vim.opt.spell = false
 vim.opt.signcolumn = "yes"
 vim.opt.mouse = "a"
 
 -- Setup lazy.nvim
 require("vim-options")
 require("lazy").setup("plugins")
+require("config.menu") -- registers :ConfigSettings and <leader>cs (if free)
