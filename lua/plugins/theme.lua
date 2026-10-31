@@ -1,4 +1,3 @@
---[[
 return {
     "catppuccin/nvim",
     name = "catppuccin",
@@ -7,7 +6,7 @@ return {
         require("catppuccin").setup({
             --flavour = 'latte', --latte makes for a light mode
             flavour = 'mocha',
-            transparent_background = false,
+            transparent_background = true,
             custom_highlights = function()
                 return {
                     --Normal = { bg = "none" },
@@ -21,8 +20,8 @@ return {
         vim.cmd.colorscheme "catppuccin"
     end
 }
-]]
 
+--[[
 return {
     "navarasu/onedark.nvim",
     priority = 1000, -- make sure to load this before all the other start plugins
@@ -33,3 +32,4 @@ return {
         require('onedark').load()
     end
 }
+]]

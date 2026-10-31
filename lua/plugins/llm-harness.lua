@@ -34,7 +34,7 @@ return {
                 pushd_cmd = 'pushd',
                 popd_cmd = 'popd',
             },
-            command = "claude",
+            command = "vibe",
             command_variants = {
                 continue = "--continue",
                 resume = "--resume",
