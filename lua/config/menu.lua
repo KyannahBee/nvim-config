@@ -1,4 +1,4 @@
--- Two-pane settings menu, opened with :ConfigSettings (or <leader>cs if free).
+-- Two-pane settings menu, opened with :ConfigSettings (or <leader>cs if free).configconfig
 -- Left pane lists plugin groups, right pane lists that group's settings.
 -- Every edit auto-saves to lua/config/local.json. Settings in `live_apply`
 -- are applied immediately; all others are marked and Neovim restarts on exit
@@ -100,9 +100,15 @@ local function set_lines(buf, lines)
 end
 
 local function render_left()
+    local function with_divider(text)
+        if #text >= state.left_w then
+            return text
+        end
+        return text .. string.rep(" ", state.left_w - 1 - #text) .. "│"
+    end
     local lines = {}
     for i, g in ipairs(groups) do
-        lines[#lines + 1] = string.format(" %s (%d)", g, #by_group[g])
+        lines[#lines + 1] = with_divider(string.format(" %s (%d)", g, #by_group[g]))
     end
     set_lines(state.bufs.left, lines)
     vim.api.nvim_win_set_cursor(state.wins.left, { state.group_idx, 0 })
@@ -254,8 +260,8 @@ function M.open()
     state.status = ""
 
     local cols, rows = vim.o.columns, vim.o.lines
-    local width = math.floor(cols * 0.9)
-    local height = math.floor(rows * 0.85)
+    local width = math.floor(cols * 0.50)
+    local height = math.floor(rows * 0.40)
     local left_w = 26
 
     state.bufs.outer = vim.api.nvim_create_buf(false, true)
@@ -276,23 +282,28 @@ function M.open()
         title = " Settings ",
         style = "minimal",
     })
+    -- No border on the panes, and panes are 2 rows shorter than the outer text
+    -- area: a child at row=1 with height=height overpaints the outer bottom
+    -- border by one row. The divider is drawn as buffer text instead.
+    state.pane_height = height - 2
+    state.left_w = left_w
     state.wins.left = vim.api.nvim_open_win(state.bufs.left, false, {
         relative = "win",
         win = state.wins.outer,
         width = left_w,
-        height = height,
+        height = state.pane_height,
         row = 1,
         col = 1,
-        border = { "", "", "", "│", "", "", "", "" }, -- divider on the right edge
+        border = "none",
         style = "minimal",
     })
     state.wins.right = vim.api.nvim_open_win(state.bufs.right, false, {
         relative = "win",
         win = state.wins.outer,
-        width = width - left_w - 2,
-        height = height,
+        width = width - left_w - 1,
+        height = state.pane_height,
         row = 1,
-        col = left_w + 2,
+        col = left_w + 1,
         border = "none",
         style = "minimal",
     })
