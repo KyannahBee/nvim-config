@@ -4,6 +4,7 @@ return {
     -- This ensures the plugin is loaded before the config runs
     lazy = false,
     config = function()
+        local t = require("config.settings").values.treesitter
         -- Use pcall (protected call) to prevent the error from freezing Neovim
         local status_ok, configs = pcall(require, "nvim-treesitter.configs")
         if not status_ok then
@@ -16,9 +17,9 @@ return {
                 "c", "cpp", "java", "rust", "html", "css", "bash",
                 "vim", "vimdoc", --"query",
             },
-            auto_install = true,
-            highlight = { enable = true },
-            indent = { enable = true },
+            auto_install = t.auto_install,
+            highlight = { enable = t.highlight },
+            indent = { enable = t.indent },
         })
     end,
 }

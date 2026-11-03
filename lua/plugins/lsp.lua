@@ -49,16 +49,17 @@ return {
             vim.lsp.enable("lua_ls")
 
             -- 4. Keybindings (Global Attach)
+            local keys = require("config.settings").values.keys
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(args)
                     local opts = { buffer = args.buf }
-                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-                    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-                    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-                    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-                    vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
-                    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-                    vim.keymap.set("n", "<leader>f", function()
+                    vim.keymap.set("n", keys.lsp_definition, vim.lsp.buf.definition, opts)
+                    vim.keymap.set("n", keys.lsp_hover, vim.lsp.buf.hover, opts)
+                    vim.keymap.set("n", keys.lsp_rename, vim.lsp.buf.rename, opts)
+                    vim.keymap.set("n", keys.lsp_code_action, vim.lsp.buf.code_action, opts)
+                    vim.keymap.set("n", keys.lsp_diagnostic_float, vim.diagnostic.open_float, opts)
+                    vim.keymap.set("n", keys.lsp_references, vim.lsp.buf.references, opts)
+                    vim.keymap.set("n", keys.lsp_format, function()
                         vim.lsp.buf.format({ async = true })
                     end, opts)
                 end,
@@ -77,12 +78,13 @@ return {
         config = function()
             local cmp = require("cmp")
             local luasnip = require("luasnip")
+            local keys = require("config.settings").values.keys
             cmp.setup({
                 snippet = { expand = function(args) luasnip.lsp_expand(args.body) end },
                 mapping = cmp.mapping.preset.insert({
-                    ["<C-Space>"] = cmp.mapping.complete(),
-                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
-                    ["<Tab>"] = cmp.mapping(function(fallback)
+                    [keys.cmp_complete] = cmp.mapping.complete(),
+                    [keys.cmp_confirm] = cmp.mapping.confirm({ select = true }),
+                    [keys.cmp_tab] = cmp.mapping(function(fallback)
                         if cmp.visible() then
                             cmp.select_next_item()
                         elseif luasnip.expand_or_jumpable() then
