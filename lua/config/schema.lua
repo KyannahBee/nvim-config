@@ -25,6 +25,8 @@ return {
     { group = "core", key = "vim.clipboard",        label = "Clipboard register",    type = "enum",    default = "unnamedplus", options = { "unnamedplus", "unnamed", "" }, desc = "Sync system clipboard with the unnamed register" },
     { group = "core", key = "vim.termguicolors",    label = "True color support",    type = "boolean", default = true,  desc = "Enable 24-bit RGB colors in the terminal" },
     { group = "core", key = "vim.splitright",       label = "Split to the right",    type = "boolean", default = true,  desc = "Open vertical splits on the right side" },
+    { group = "core", key = "keys.window_nav_left",  label = "Window nav left",  type = "string", default = "<C-h>", desc = "Move to the window on the left; cycles tree/editor/harness with wraparound (normal + terminal mode)" },
+    { group = "core", key = "keys.window_nav_right", label = "Window nav right", type = "string", default = "<C-l>", desc = "Move to the window on the right; cycles tree/editor/harness with wraparound (normal + terminal mode)" },
 
     -- ── llm-harness (greggh/claude-code.nvim) ─────────────────────────────
     { group = "llm-harness", key = "harness.command",                 label = "AI command",            type = "string",  default = "vibe",          desc = "CLI launched by the harness toggle, e.g. vibe, claude, aider" },
@@ -54,7 +56,7 @@ return {
     { group = "llm-harness", key = "harness.keymaps.toggle_terminal", label = "Toggle (terminal mode)", type = "string", default = "<C-,>",  desc = "Keymap to toggle the harness in terminal mode" },
     { group = "llm-harness", key = "harness.keymaps.variant_continue", label = "Continue variant key", type = "string", default = "<leader>cC", desc = "Keymap for the continue variant" },
     { group = "llm-harness", key = "harness.keymaps.variant_verbose", label = "Verbose variant key",  type = "string",  default = "<leader>cV", desc = "Keymap for the verbose variant" },
-    { group = "llm-harness", key = "harness.keymaps.window_navigation", label = "Window navigation keys", type = "boolean", default = true, desc = "Bind <C-h>/<C-l> to move between windows" },
+    { group = "llm-harness", key = "harness.keymaps.window_navigation", label = "Window navigation keys", type = "boolean", default = false, desc = "Bind <C-h>/<C-l> inside the harness terminal only; off by default because the global window-nav keys (core group) already cover it and buffer-local maps would shadow them" },
     { group = "llm-harness", key = "harness.keymaps.scrolling",       label = "Scrolling keys",        type = "boolean", default = true,  desc = "Bind scroll keys in the harness terminal" },
 
     -- ── theme (catppuccin) ────────────────────────────────────────────────
