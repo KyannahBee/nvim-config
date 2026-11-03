@@ -23,6 +23,38 @@ return {
             }
 
         })
+        -- pets.nvim hardcodes the popup anchor to the bottom-right; re-anchor it
+        -- to the configured side. Percentage anchors scale with the editor width,
+        -- and pets.nvim re-mounts from these opts on VimResized, so this follows
+        -- any monitor. Must happen before the spawn command creates the pet.
+        local pets = require("pets")
+        pets.options.popup.position.col = (p.side == "left") and "0%" or "100%"
+
+        -- hologram.nvim bug workaround: utils.filler_above reads the *current*
+        -- window's topfill via vim.fn.winsaveview(), so the pet image is placed
+        -- at the wrong screen row whenever focus is in a scrolled window (e.g.
+        -- after moving focus with <C-w>l) and the pet appears to vanish. Use the
+        -- popup window's own topfill instead. buf_screenpos calls filler_above
+        -- through the module table, so overriding the field is enough.
+        local holo_utils = require("hologram.utils")
+        holo_utils.filler_above = function(row, win, buf)
+            local top = vim.fn.line("w0", win)
+            row = row - 1 -- row exclusive
+            if row <= top then
+                return 0
+            end
+            local info = vim.fn.getwininfo(win)[1]
+            local filler = info and info.topfill or 0
+            local exts = vim.api.nvim_buf_get_extmarks(buf, vim.g.hologram_extmark_ns, { top - 1, 0 }, { row - 1, -1 }, { details = true })
+            for i = 1, #exts do
+                local opts = exts[i][4]
+                if opts.virt_lines then
+                    filler = filler + #opts.virt_lines
+                end
+            end
+            return filler
+        end
+
         vim.cmd(p.spawn_command)
     end
 }

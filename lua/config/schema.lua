@@ -71,14 +71,15 @@ return {
     { group = "alpha", key = "alpha.header", label = "Dashboard header", type = "display", desc = "ASCII art header in alpha.lua (table of strings)" },
 
     -- ── pets ──────────────────────────────────────────────────────────────
+    { group = "pets", key = "pet.side",                   label = "Pet side",           type = "enum",    default = "left", options = { "left", "right" }, desc = "Screen edge the pet popup is anchored to (percentage-based, follows any monitor width)" },
     { group = "pets", key = "pet.row",                    label = "Pet row",            type = "number",  default = 5, min = 1, max = 10, desc = "Row (height) the pet is displayed at, 1-10" },
-    { group = "pets", key = "pet.col",                    label = "Pet column",         type = "number",  default = 0, min = 0, desc = "Column the pet is displayed at; set high to pin it to the right" },
+    { group = "pets", key = "pet.col",                    label = "Pet column",         type = "number",  default = 0, min = 0, desc = "Leftmost column inside the pet popup the pet can wander to; higher pins it toward the popup's right edge" },
     { group = "pets", key = "pet.speed_multiplier",       label = "Pet speed",          type = "number",  default = 1, min = 0.1, max = 10, desc = "Animation speed multiplier (lower = choppier but slower)" },
     { group = "pets", key = "pet.default_pet",            label = "Default pet",        type = "string",  default = "dog",   desc = "Pet spawned by the PetNew command, e.g. dog, cat" },
     { group = "pets", key = "pet.default_style",          label = "Default pet style",  type = "string",  default = "beige", desc = "Style of the default pet, e.g. beige" },
     { group = "pets", key = "pet.random",                 label = "Random pet",         type = "boolean", default = false, desc = "Spawn a random pet, overriding default_pet/default_style" },
     { group = "pets", key = "pet.death_animation",        label = "Death animation",    type = "boolean", default = false, desc = "Animate the pet's death" },
-    { group = "pets", key = "pet.popup_width",            label = "Popup width",        type = "string",  default = "40",  desc = "Pet popup width (percent string or columns)" },
+    { group = "pets", key = "pet.popup_width",            label = "Popup width",        type = "string",  default = "20%", desc = "Pet popup width; use a percent string like \"20%\" so it scales with any monitor width" },
     { group = "pets", key = "pet.popup_winblend",         label = "Popup winblend",     type = "number",  default = 100, min = 0, max = 100, desc = "Transparency of the pet popup (100 = invisible)" },
     { group = "pets", key = "pet.popup_avoid_statusline", label = "Avoid statusline",   type = "boolean", default = false, desc = "Spawn the popup above the statusline instead of blending over it" },
     { group = "pets", key = "pet.spawn_command",          label = "Spawn command",      type = "string",  default = "PetsNew {Sudo}", desc = "Command run on VimEnter to spawn the pet" },
